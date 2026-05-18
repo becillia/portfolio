@@ -42,15 +42,98 @@ const skillGroups = [
   },
 ];
 
+const ToolIcon = ({ type }) => {
+  const common = {
+    width: 22,
+    height: 22,
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    'aria-hidden': true,
+  };
+
+  if (type === 'vscode') {
+    return (
+      <svg {...common}>
+        <path d="M16.5 4 7 12l9.5 8 3.5-1.6V5.6L16.5 4Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+        <path d="M7 12 3.8 9.5 2.5 10.7v2.6l1.3 1.2L7 12Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  if (type === 'github') {
+    return (
+      <svg {...common} fill="currentColor">
+        <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.5v-1.9c-2.78.62-3.37-1.22-3.37-1.22-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.56 2.34 1.11 2.91.85.09-.67.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.04A9.28 9.28 0 0 1 12 6.97c.85 0 1.7.12 2.5.34 1.9-1.32 2.74-1.04 2.74-1.04.55 1.4.2 2.44.1 2.7.64.71 1.03 1.62 1.03 2.74 0 3.93-2.34 4.8-4.57 5.06.36.32.68.95.68 1.92v2.79c0 .28.18.6.69.5A10.16 10.16 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z" />
+      </svg>
+    );
+  }
+
+  if (type === 'figma') {
+    return (
+      <svg {...common}>
+        <path d="M9 3h3v6H9a3 3 0 1 1 0-6Z" stroke="currentColor" strokeWidth="2" />
+        <path d="M12 3h3a3 3 0 1 1 0 6h-3V3Z" stroke="currentColor" strokeWidth="2" />
+        <path d="M9 9h3v6H9a3 3 0 1 1 0-6Z" stroke="currentColor" strokeWidth="2" />
+        <path d="M12 9h3a3 3 0 1 1-3 3V9Z" stroke="currentColor" strokeWidth="2" />
+        <path d="M9 15h3v3a3 3 0 1 1-3-3Z" stroke="currentColor" strokeWidth="2" />
+      </svg>
+    );
+  }
+
+  if (type === 'photoshop') {
+    return (
+      <svg {...common}>
+        <rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" strokeWidth="2" />
+        <path d="M7 15V9h3.1a2.1 2.1 0 1 1 0 4.2H7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M14 14.7c.5.35 1.1.5 1.7.5.75 0 1.3-.3 1.3-.85 0-.5-.35-.72-1.25-.98-.95-.28-1.55-.75-1.55-1.58 0-.92.78-1.55 1.92-1.55.65 0 1.17.13 1.58.35" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
+  if (type === 'firebase') {
+    return (
+      <svg {...common}>
+        <path d="M5 20 8.2 4l3.1 5.8L13.2 7 19 20H5Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+        <path d="m8.2 4 4.7 16M11.3 9.8 5 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
+  if (type === 'vercel') {
+    return (
+      <svg {...common} fill="currentColor">
+        <path d="M12 4 22 20H2L12 4Z" />
+      </svg>
+    );
+  }
+
+  if (type === 'illustrator') {
+    return (
+      <svg {...common}>
+        <rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" strokeWidth="2" />
+        <path d="m7 15 2.3-6h1.4L13 15m-5.2-1.7h4.4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M16 10.2V15M16 8.5v.1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...common}>
+      <path d="M6 18h12M7 14c2.8-1.8 3-5.8 5-8 2 2.2 2.2 6.2 5 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M8 11c1.2 1 2.5 1.5 4 1.5S14.8 12 16 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+};
+
 const tools = [
-  { name: 'VS Code',    emoji: '💙', color: 'var(--sky)' },
-  { name: 'Git & GitHub', emoji: '🐙', color: 'var(--mint)' },
-  { name: 'Figma',      emoji: '🎯', color: 'var(--lavender)' },
-  { name: 'Photoshop',  emoji: '🖼️', color: 'var(--sky)' },
-  { name: 'Firebase',   emoji: '🔥', color: 'var(--peach)' },
-  { name: 'Vercel',     emoji: '▲', color: 'var(--rose)' },
-  { name: 'Illustrator',emoji: '✏️', color: 'var(--butter)' },
-  { name: 'Canva',      emoji: '🎨', color: 'var(--mint)' },
+  { name: 'VS Code', icon: 'vscode', color: 'var(--sky)' },
+  { name: 'Git & GitHub', icon: 'github', color: 'var(--mint)' },
+  { name: 'Figma', icon: 'figma', color: 'var(--lavender)' },
+  { name: 'Photoshop', icon: 'photoshop', color: 'var(--sky)' },
+  { name: 'Firebase', icon: 'firebase', color: 'var(--peach)' },
+  { name: 'Vercel', icon: 'vercel', color: 'var(--rose)' },
+  { name: 'Illustrator', icon: 'illustrator', color: 'var(--butter)' },
+  { name: 'Canva', icon: 'canva', color: 'var(--mint)' },
 ];
 
 function SkillBar({ name, level, accent, vis, delay }) {
@@ -156,7 +239,9 @@ export default function Skills() {
               onMouseEnter={e => { e.currentTarget.style.transform='translateY(-4px) scale(1.05)'; }}
               onMouseLeave={e => { e.currentTarget.style.transform='translateY(0) scale(1)'; }}
               >
-                <span style={{fontSize:'1.1rem'}}>{t.emoji}</span>
+                <span style={{ display:'inline-flex', color:'var(--text)', flexShrink:0 }}>
+                  <ToolIcon type={t.icon} />
+                </span>
                 {t.name}
               </div>
             ))}
