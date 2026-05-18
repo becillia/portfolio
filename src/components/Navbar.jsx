@@ -38,11 +38,27 @@ export default function Navbar() {
       }}>
         {/* Logo */}
         <button onClick={() => handleNav('#hero')} style={{
-          background: 'none', border: 'none', cursor: 'pointer',
+          background: 'transparent', border: 'none', cursor: 'pointer',
+          display: 'inline-flex', alignItems: 'center', gap: '0.65rem',
           fontFamily: 'var(--font-display)', fontWeight: 900,
-          fontSize: '1.4rem', color: 'var(--rose-deep)',
-          letterSpacing: '-0.02em',
+          fontSize: '1rem', color: 'var(--text)',
+          letterSpacing: '0',
         }}>
+          <span aria-hidden="true" style={{
+            width: 42, height: 42, borderRadius: '50%',
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            background: 'linear-gradient(135deg, var(--rose-deep), var(--lav-deep))',
+            color: '#fff',
+            fontFamily: 'var(--font-display)',
+            fontSize: '1.65rem',
+            fontWeight: 900,
+            lineHeight: 1,
+            boxShadow: '0 8px 24px rgba(232,115,154,0.28)',
+            border: '2px solid rgba(255,252,250,0.9)',
+          }}>
+            B
+          </span>
+          <span className="brand-name"></span>
         </button>
 
         {/* Desktop links */}
@@ -121,6 +137,7 @@ export default function Navbar() {
         @media(max-width:640px) {
           .nav-links { display: none !important; }
           .hamburger { display: flex !important; }
+          .brand-name { display: none; }
         }
       `}</style>
     </>

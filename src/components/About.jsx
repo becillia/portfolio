@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import fotoBethania from '../assets/foto-bethania.jpg';
 
 function useVisible(threshold = 0.15) {
   const ref = useRef(null);
@@ -12,9 +13,9 @@ function useVisible(threshold = 0.15) {
 }
 
 const stats = [
-  { num: '10+', label: 'Projects Selesai' },
+  { num: '7+', label: 'Projects Selesai' },
   { num: '2',   label: 'Fokus Keahlian' },
-  { num: '3+',  label: 'Tools Dikuasai' },
+  { num: '5+',  label: 'Tools Dikuasai' },
   { num: '∞',   label: 'Semangat Belajar' },
 ];
 
@@ -67,14 +68,59 @@ export default function About() {
               boxShadow: '0 20px 60px rgba(232,115,154,0.2)',
               maxWidth: 340,
             }}>
-              <span>🌸</span>
+              <img
+                src={fotoBethania}
+                alt="Bethania Cicilia Gunawan"
+                style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
+/>
               {/* Inner decoration */}
               <div style={{
                 position: 'absolute', bottom: 0, left: 0, right: 0,
                 padding: '1.5rem',
                 background: 'linear-gradient(to top, rgba(255,255,255,0.9), transparent)',
               }}>
-                <p style={{ fontFamily:'var(--font-body)', fontSize:'0.85rem', color:'var(--text-soft)' }}>Developer & Designer</p>
+                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                  <a
+                    href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&to=bethaniac462@gmail.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Email Bethania"
+                    title="Email"
+                    style={{
+                      width: 42, height: 42, borderRadius: '50%',
+                      background: 'rgba(255,255,255,0.88)',
+                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                      color: 'var(--rose-deep)', boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M4 6h16v12H4V6Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+                      <path d="m4 7 8 6 8-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/bethaniacicilia"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="LinkedIn Bethania"
+                    title="LinkedIn"
+                    style={{
+                      width: 42, height: 42, borderRadius: '50%',
+                      background: 'rgba(255,255,255,0.88)',
+                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                      color: 'var(--lav-deep)', boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+                      textDecoration: 'none', fontFamily: 'Arial, sans-serif',
+                      fontWeight: 700, fontSize: '1rem',
+                    }}
+                  >
+                    in
+                  </a>
+                </div>
               </div>
             </div>
 

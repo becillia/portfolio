@@ -11,10 +11,54 @@ function useVisible(threshold = 0.1) {
   return [ref, vis];
 }
 
+const ContactIcon = ({ type }) => {
+  const common = {
+    width: 24,
+    height: 24,
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    'aria-hidden': true,
+  };
+
+  if (type === 'email') {
+    return (
+      <svg {...common}>
+        <path d="M4 6h16v12H4V6Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+        <path d="m4 7 8 6 8-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  if (type === 'linkedin') {
+    return (
+      <svg {...common} fill="currentColor">
+        <path d="M6.94 8.98H3.88V20h3.06V8.98ZM5.42 4C4.43 4 3.7 4.72 3.7 5.66c0 .92.71 1.66 1.68 1.66h.02c1.01 0 1.72-.74 1.72-1.66C7.1 4.72 6.41 4 5.42 4ZM20.3 13.68c0-3.32-1.77-4.86-4.13-4.86-1.9 0-2.75 1.04-3.23 1.78V8.98H9.9c.04 1.03 0 11.02 0 11.02h3.05v-6.15c0-.33.02-.66.12-.9.26-.66.85-1.34 1.84-1.34 1.3 0 1.82 1 1.82 2.46V20h3.06v-6.32h.01Z" />
+      </svg>
+    );
+  }
+
+  if (type === 'github') {
+    return (
+      <svg {...common} fill="currentColor">
+        <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.5v-1.9c-2.78.62-3.37-1.22-3.37-1.22-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.56 2.34 1.11 2.91.85.09-.67.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.04A9.28 9.28 0 0 1 12 6.97c.85 0 1.7.12 2.5.34 1.9-1.32 2.74-1.04 2.74-1.04.55 1.4.2 2.44.1 2.7.64.71 1.03 1.62 1.03 2.74 0 3.93-2.34 4.8-4.57 5.06.36.32.68.95.68 1.92v2.79c0 .28.18.6.69.5A10.16 10.16 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...common}>
+      <rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" strokeWidth="2" />
+      <circle cx="12" cy="12" r="3.5" stroke="currentColor" strokeWidth="2" />
+      <circle cx="16.8" cy="7.2" r="1" fill="currentColor" />
+    </svg>
+  );
+};
+
 const contacts = [
-  { icon: '📧', label: 'Email', value: 'bethaniac462@gmail.com',        href: 'mailto:bethaniac462@gmail.com',             color:'var(--rose)' },
-  { icon: '💼', label: 'LinkedIn', value: 'linkedin.com/in/bethaniacicilia', href: 'https://linkedin.com',         color:'var(--sky)' },
-  { icon: '🐙', label: 'GitHub', value: 'github.com/becillia',  href: 'https://github.com',                color:'var(--mint)' },
+  { icon: <ContactIcon type="email" />, label: 'Email', value: 'bethaniac462@gmail.com', href: 'https://mail.google.com/mail/u/0/?fs=1&tf=cm&to=bethaniac462@gmail.com', color:'var(--rose)' },
+  { icon: <ContactIcon type="linkedin" />, label: 'LinkedIn', value: 'linkedin.com/in/bethaniacicilia', href: 'https://linkedin.com/in/bethaniacicilia', color:'var(--sky)' },
+  { icon: <ContactIcon type="github" />, label: 'GitHub', value: 'github.com/becillia', href: 'https://github.com/becillia', color:'var(--mint)' },
+  { icon: <ContactIcon type="instagram" />, label: 'Instagram', value: 'instagram.com/bethanianuela', href: 'https://instagram.com/bethanianuela', color:'var(--peach)' },
 ];
 
 export default function Contact() {
@@ -23,13 +67,36 @@ export default function Contact() {
   const [sent, setSent] = useState(false);
 
   const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // In production: connect to EmailJS, Formspree, etc.
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const data = {
+    name: form.name,
+    email: form.email,
+    _replyto: form.email,
+    message: form.message,
+  };
+
+  const response = await fetch('https://formspree.io/f/xgoqelln', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (response.ok) {
     setSent(true);
     setTimeout(() => setSent(false), 3000);
-    setForm({ name:'', email:'', message:'' });
-  };
+
+    setForm({
+      name: '',
+      email: '',
+      message: '',
+    });
+  }
+};
 
   const inputStyle = {
     width:'100%', padding:'0.9rem 1.2rem',

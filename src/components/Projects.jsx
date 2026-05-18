@@ -1,9 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 
 import simpleK from '../assets/Simple-K.png';
-import dailyChallenge from '../assets/daily-challenge.png';
+import dailyChallenge from '../assets/daily-challenge.jpeg';
 import dailyUI from '../assets/daily-ui.jpeg';
-import reservasiHotel from '../assets/reservasi-hotel.png';
+import reservasiHotel from '../assets/reservasi-hotel.jpg';
+import posterBurger from '../assets/poster-burger.png';
+import gameUI from '../assets/game-ui.png';
+import carepetWeb from '../assets/carepet-web.png';
 
 function useVisible(threshold = 0.1) {
   const ref = useRef(null);
@@ -37,20 +40,29 @@ const appProjects = [
   {
     title: 'Daily Challenge App',
     desc: 'Aplikasi mobile checklist aktivitas sehari-hari yang membantu pengguna mencatat dan menandai aktivitas yang sudah selesai.',
-    tech: ['Flutter', 'Firebase', 'Dart', 'Mobile App'],
+    tech: ['Flutter', 'Supabase', 'Dart', 'Mobile App'],
     color: 'var(--rose)',
-    accent: 'var(--rose-deep)',
+    accent: '#3c5067',
     tag: 'Mobile App',
     image: dailyChallenge,
   },
   {
     title: 'Website Reservasi Hotel - UAS',
     desc: 'Website reservasi hotel yang memungkinkan pengguna melakukan pemesanan kamar, melihat detail hotel, dan mengelola data reservasi secara online.',
-    tech: ['MySQL', 'PHP', ],
+    tech: ['MySQL', 'PHP', 'CI4'],
     color: 'var(--rose)',
-    accent: 'var(--rose-deep)',
+    accent: '#4a90d9',
     tag: 'Web App',
     image: reservasiHotel,
+  },
+  {
+    title: 'Care Pet Website',
+    desc: 'Website layanan perawatan hewan dengan fitur grooming, kesehatan, dan penitipan hewan yang dirancang dengan tampilan modern dan user friendly.',
+    tech: ['Next.js', 'TypeScript', 'API Routes', 'Neon(PostgreSQL)', 'Vercel'],
+    color: 'var(--rose)',
+    accent: '#4a90d9',
+    tag: 'Web App',
+    image: carepetWeb,
   },
 ];
 
@@ -64,9 +76,27 @@ const designProjects = [
     tag: 'UI Design',
     image: dailyUI,
   },
+  {
+    title: 'Burger Blast Poster',
+    desc: 'Desain poster promosi burger dengan konsep modern dan visual menarik untuk meningkatkan daya tarik produk makanan cepat saji.',
+    tech: ['Canva', 'Graphic Design'],
+    color: 'var(--lavender)',
+    accent: 'var(--lav-deep)',
+    tag: 'Graphic Design',
+    image: posterBurger,
+  },
+  {
+    title: 'Little Farmer Mobile Game UI',
+    desc: 'Desain UI mobile game bertema farming dengan tampilan ceria, interaktif, dan user friendly untuk meningkatkan pengalaman bermain pengguna.',
+    tech: ['Canva', 'UI Design', 'Mobile Game Design'],
+    color: 'var(--lavender)',
+    accent: 'var(--lav-deep)',
+    tag: 'UI Design',
+    image: gameUI,
+  },
 ];
 
-function ProjectCard({ project, index, vis }) {
+function ProjectCard({ project, index, vis, onDetail }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -189,16 +219,153 @@ function ProjectCard({ project, index, vis }) {
         ))}
       </div>
 
-      <div
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onDetail(project);
+        }}
         style={{
+          width: 'fit-content',
+          background: 'transparent',
+          border: 'none',
+          padding: 0,
           color: project.accent,
           fontWeight: 600,
           fontSize: '0.9rem',
+          cursor: 'pointer',
           transform: hovered ? 'translateX(5px)' : 'none',
           transition: 'transform 0.3s ease',
         }}
       >
         Lihat Detail →
+      </button>
+    </div>
+  );
+}
+
+function ProjectModal({ project, onClose }) {
+  if (!project) return null;
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        background: 'rgba(0,0,0,0.75)',
+        backdropFilter: 'blur(8px)',
+        zIndex: 9999,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '2rem',
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          width: 'min(900px, 100%)',
+          maxHeight: '90vh',
+          overflowY: 'auto',
+          background: 'var(--card-bg)',
+          borderRadius: '24px',
+          padding: '1.5rem',
+          border: `1.5px solid ${project.accent}`,
+          boxShadow: `0 20px 80px ${project.accent}55`,
+          position: 'relative',
+        }}
+      >
+        <button
+          onClick={onClose}
+          style={{
+            position: 'absolute',
+            top: '1rem',
+            right: '1rem',
+            width: 36,
+            height: 36,
+            borderRadius: '50%',
+            border: 'none',
+            background: 'rgba(0,0,0,0.65)',
+            color: '#fff',
+            fontSize: '1.2rem',
+            cursor: 'pointer',
+            zIndex: 2,
+          }}
+        >
+          ×
+        </button>
+
+        <img
+          src={project.image}
+          alt={project.title}
+          style={{
+            width: '100%',
+            maxHeight: '520px',
+            objectFit: 'contain',
+            borderRadius: '18px',
+            background: '#111',
+            marginBottom: '1.5rem',
+          }}
+        />
+
+        <span
+          style={{
+            background: project.accent,
+            color: '#fff',
+            padding: '0.35rem 0.85rem',
+            borderRadius: '99px',
+            fontSize: '0.75rem',
+            fontWeight: 600,
+          }}
+        >
+          {project.tag}
+        </span>
+
+        <h2
+          style={{
+            marginTop: '1rem',
+            fontSize: '2rem',
+            color: 'var(--text)',
+          }}
+        >
+          {project.title}
+        </h2>
+
+        <p
+          style={{
+            marginTop: '0.8rem',
+            color: 'var(--text-soft)',
+            lineHeight: 1.7,
+            fontSize: '1rem',
+          }}
+        >
+          {project.desc}
+        </p>
+
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '0.5rem',
+            marginTop: '1rem',
+          }}
+        >
+          {project.tech.map((t) => (
+            <span
+              key={t}
+              style={{
+                fontSize: '0.75rem',
+                color: 'var(--text-soft)',
+                background: 'rgba(255,255,255,0.08)',
+                padding: '0.3rem 0.75rem',
+                borderRadius: '99px',
+                border: '1px solid rgba(255,255,255,0.08)',
+              }}
+            >
+              {t}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -207,6 +374,7 @@ function ProjectCard({ project, index, vis }) {
 export default function Projects() {
   const [ref, vis] = useVisible();
   const [tab, setTab] = useState('app');
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const projects = tab === 'app' ? appProjects : designProjects;
 
@@ -325,10 +493,16 @@ export default function Projects() {
               project={project}
               index={i}
               vis={vis}
+              onDetail={setSelectedProject}
             />
           ))}
         </div>
       </div>
+
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
   );
 }
