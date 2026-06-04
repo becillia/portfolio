@@ -141,7 +141,6 @@ function SkillBar({ name, level, accent, vis, delay }) {
     <div style={{ marginBottom: '1.1rem' }}>
       <div style={{ display:'flex', justifyContent:'space-between', marginBottom:'0.4rem' }}>
         <span style={{ fontFamily:'var(--font-body)', fontSize:'0.88rem', fontWeight:500 }}>{name}</span>
-        <span style={{ fontFamily:'var(--font-mono)', fontSize:'0.75rem', color:'var(--text-soft)' }}>{level}%</span>
       </div>
       <div style={{ height:8, background:'rgba(0,0,0,0.07)', borderRadius:99, overflow:'hidden' }}>
         <div style={{
