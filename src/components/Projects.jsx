@@ -79,7 +79,7 @@ const designProjects = [
   {
     title: 'Burger Blast Poster',
     desc: 'Desain poster promosi burger dengan konsep modern dan visual menarik untuk meningkatkan daya tarik produk makanan cepat saji.',
-    tech: ['Canva', 'Graphic Design'],
+    tech: ['Adobe Illustrator', 'Graphic Design'],
     color: 'var(--lavender)',
     accent: 'var(--lav-deep)',
     tag: 'Graphic Design',
